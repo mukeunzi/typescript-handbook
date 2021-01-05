@@ -20,9 +20,9 @@ const name: MyName = 'naeunji';
 - 아래는 인터페이스로 선언한 타입과, 타입 별칭으로 선언한 타입을 프리뷰로 확인한 결과입니다.
 
 [인터페이스 프리뷰]
-![interface-vscode-preview](../images/ex-interface.png)
+![interface-vscode-preview](../images/day05/ex-interface.png)
 [타입 별칭 프리뷰]
-![type-alias-vscode-preview](../images/ex-type-alias.png)
+![type-alias-vscode-preview](../images/day05/ex-type-alias.png)
 - 타입 별칭은 정의한 타입에 대해 쉽게 확인할 수 있습니다. 
 
 ### 타입 별칭과 인터페이스의 차이
