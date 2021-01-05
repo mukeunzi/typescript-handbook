@@ -25,7 +25,7 @@ logText('안녕');
 ![제네릭 프리뷰](../images/day09/generic-type-settings.png)
 - 위 예시처럼 제네릭 타입을 명시적으로도 지정할 수 있습니다.
 
-### 타입 정의 방식의 문제점(함수 중복 선언의)
+### 타입 정의 방식의 문제점(함수 중복 선언)
 - 먼저 기존 타입 정의 방식의 문제점을 살펴보겠습니다.
 ```js
 function logText(text) {
@@ -132,6 +132,7 @@ logTextLength<string>(['hi', 'hello']);
 - 파라미터와 리턴 타입을 배열로 지정했기 때문에, 배열에서 사용할 수 있는 API(메소드)를 모두 사용할 수 있습니다. 
 
 ### 제네릭의 타입 제한 - 정의된 타입으로 타입 제한하기
+- 제네릭으로 타입을 제한하는 방법에 대해 살펴보겠습니다.
 ```js
 interface LengthType {
   length: number;
@@ -149,3 +150,24 @@ logTextLength({ length: 30 }); // 정상 동작
 - `extends`키워드를 이용해 제네릭의 타입을 제한할 수 있습니다. 필수로 존재해야 하는 속성을 인터페이스로 정의해준 뒤, 함수 선언 시에 `<T extends {interfaceName}>`형식으로 선언합니다.
 - 함수를 호출할 때에는 `length`속성이 존재할 경우에만 정상적으로 코드가 실행됩니다.
 - 따라서 예시에서는 `string`타입의 파라미터, 객체의 `length`속성이 있는 경우에만 코드가 정상적으로 동작합니다.
+
+### 제네릭의 타입 제한 - keyof로 타입 제한하기
+- 제네릭에서 `keyof`로 타입을 제한하는 방법에 대해 살펴보겠습니다.
+```js
+interface ShoppingItem {
+  name: string;
+  price: number;
+  stock: number;
+}
+
+function getShoppingItem<T extends keyof ShoppingItem>(item: T): T {
+  return item;
+}
+
+getShoppingItem('name');
+getShoppingItem('price');
+getShoppingItem('stock');
+```
+- `keyof`키워드를 사용하면 제네릭의 타입을 제한할 수 있습니다. 
+- `<T extends keyof {interfaceName}>` 형식으로 선언하면, 인터페이스의 `key`값들 만이 파라미터로 전달될 수 있습니다. 
+- 따라서 위 코드에서는 `ShoppingItem`인터페이스에 선언된 `name, price, stock`만을 파라미터로 전달할 수 있습니다.
